@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mera Ilaka 🏪 Business Dashboard</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/business-dashboard.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand"><span>🏘️</span>Mera Ilaka</div>
+  <div class="nav-right">
+    <span id="navClock"></span>
+    <div class="nav-bell">🔔<span class="dot"></span></div>
+    <div class="nav-user" id="navUser">👤 Loading...</div>
+    <button class="btn-logout" onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-section">My Business</div>
+    <a class="active" onclick="showTab('overview')"><span class="icon">📊</span> Overview</a>
+    <a onclick="showTab('profile')"><span class="icon">🏪</span> Profile</a>
+    <a onclick="showTab('products')"><span class="icon">📦</span> Products</a>
+    <a onclick="showTab('orders')"><span class="icon">🛒</span> Orders</a>
+    <a onclick="showTab('reviews')"><span class="icon">⭐</span> Reviews</a>
+    <a onclick="showTab('promotions')"><span class="icon">📣</span> Promotions</a>
+    <div class="sidebar-section">Neighbourhood</div>
+    <a href="dashboard.html"><span class="icon">🏠</span> Community Home</a>
+    <a href="businesses.html"><span class="icon">🔍</span> All Businesses</a>
+    <a href="marketplace.html"><span class="icon">🛍️</span> Marketplace</a>
+    <div class="sidebar-section">Account</div>
+    <a href="profile.html"><span class="icon">👤</span> My Profile</a>
+  </aside>
+
+  <main class="main">
+
+    <!-- OVERVIEW TAB -->
+    <div class="tab-content active" id="tab-overview">
+      <div class="biz-welcome-banner">
+        <div class="biz-welcome-left">
+          <div class="biz-logo-big" id="bizLogoOverview">🏪</div>
+          <div>
+            <h2 id="bizWelcomeName">Loading...</h2>
+            <p id="bizWelcomeType">Category • Hours</p>
+            <span class="status-pill open" id="bizStatusPill">🟢 Open Now</span>
+          </div>
+        </div>
+        <div class="biz-welcome-actions">
+          <button class="btn-action blue"   onclick="showTab('profile')">✏️ Edit Profile</button>
+          <button class="btn-action green"  onclick="showTab('products')">➕ Add Product</button>
+          <button class="btn-action orange" onclick="showTab('promotions')">📣 Run Promo</button>
+        </div>
+      </div>
+
+      <div class="bd-stats-grid">
+        <div class="bd-stat-card"><div class="bd-stat-icon">👁️</div><div><div class="bd-stat-num" id="statViews">248</div><div class="bd-stat-lbl">Views <span class="bd-trend up">▲ 12%</span></div></div></div>
+        <div class="bd-stat-card"><div class="bd-stat-icon">📞</div><div><div class="bd-stat-num" id="statCalls">34</div><div class="bd-stat-lbl">Call Clicks <span class="bd-trend up">▲ 5 today</span></div></div></div>
+        <div class="bd-stat-card"><div class="bd-stat-icon">⭐</div><div><div class="bd-stat-num" id="statRating">4.6</div><div class="bd-stat-lbl">Avg Rating <span class="bd-trend neutral">23 reviews</span></div></div></div>
+        <div class="bd-stat-card"><div class="bd-stat-icon">📦</div><div><div class="bd-stat-num" id="statProducts">6</div><div class="bd-stat-lbl">Products <span class="bd-trend down">▼ 2 out of stock</span></div></div></div>
+        <div class="bd-stat-card"><div class="bd-stat-icon">🛒</div><div><div class="bd-stat-num" id="statOrders">18</div><div class="bd-stat-lbl">Inquiries <span class="bd-trend up">▲ 8 pending</span></div></div></div>
+        <div class="bd-stat-card"><div class="bd-stat-icon">📣</div><div><div class="bd-stat-num" id="statPromos">2</div><div class="bd-stat-lbl">Promos <span class="bd-trend neutral">Ends in 3 days</span></div></div></div>
+      </div>
+
+      <div class="row-2">
+        <div class="widget">
+          <h3>🛒 Recent Inquiries <a onclick="showTab('orders')">View All →</a></h3>
+          <div id="recentInquiries"></div>
+        </div>
+        <div class="widget">
+          <h3>⭐ Recent Reviews <a onclick="showTab('reviews')">View All →</a></h3>
+          <div id="recentReviews"></div>
+        </div>
+      </div>
+
+      <div class="widget" style="margin-top:20px;">
+        <h3>📈 Weekly Profile Views</h3>
+        <div class="chart-bar-wrap" id="chartWrap"></div>
+      </div>
+    </div>
+
+    <!-- PROFILE TAB -->
+    <div class="tab-content" id="tab-profile">
+      <div class="tab-header"><h2>🏪 Business Profile</h2><p>Update your public listing.</p></div>
+      <div class="profile-form-card">
+        <div class="form-section-title">Basic Information</div>
+        <div class="form-grid-2">
+          <div class="form-group"><label>Business Name *</label><input id="profileName" placeholder="e.g. Sharma Grocery Store" /></div>
+          <div class="form-group"><label>Category *</label>
+            <select id="profileCategory">
+              <option value="food">🍽️ Food</option>
+              <option value="medical">🏥 Medical</option>
+              <option value="shop">🛍️ Shop</option>
+              <option value="service">🔧 Service</option>
+              <option value="education">📚 Education</option>
+              <option value="beauty">💅 Beauty</option>
+              <option value="fitness">🏋️ Fitness</option>
+              <option value="other">🏪 Other</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Tagline</label><input id="profileType" placeholder="e.g. Multi-Cuisine Restaurant" /></div>
+          <div class="form-group"><label>Phone *</label><input id="profilePhone" placeholder="98765 43210" /></div>
+          <div class="form-group"><label>WhatsApp</label><input id="profileWhatsapp" placeholder="98765 43210" /></div>
+          <div class="form-group"><label>Email</label><input type="email" id="profileEmail" placeholder="business@email.com" /></div>
+        </div>
+
+        <div class="form-section-title" style="margin-top:18px;">Location & Hours</div>
+        <div class="form-group"><label>Address</label><input id="profileAddress" placeholder="Block A, Shop No. 3" /></div>
+        <div class="form-grid-2">
+          <div class="form-group"><label>Hours</label><input id="profileHours" placeholder="9 AM – 9 PM" /></div>
+          <div class="form-group"><label>Days Open</label><input id="profileDays" placeholder="Mon – Sat" /></div>
+        </div>
+
+        <div class="form-section-title" style="margin-top:18px;">About</div>
+        <div class="form-group"><label>Description</label><textarea id="profileDesc" rows="3" placeholder="Tell residents what makes your business special..."></textarea></div>
+
+        <div class="form-section-title" style="margin-top:18px;">Online</div>
+        <div class="form-grid-2">
+          <div class="form-group"><label>Website</label><input type="url" id="profileWebsite" placeholder="https://yoursite.com" /></div>
+          <div class="form-group"><label>Social Link</label><input type="url" id="profileSocial" placeholder="https://instagram.com/yourbiz" /></div>
+        </div>
+
+        <div class="form-section-title" style="margin-top:18px;">Status</div>
+        <div class="status-toggle-row">
+          <div><div class="status-toggle-label">Business Status</div><div class="status-toggle-sub">Let residents know if you're open today</div></div>
+          <label class="toggle-switch"><input type="checkbox" id="bizStatusToggle" checked /><span class="toggle-slider"></span></label>
+          <span class="status-toggle-text" id="statusToggleText">🟢 Open</span>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-secondary" onclick="resetProfileForm()">Reset</button>
+          <button class="btn-primary"   onclick="saveProfile()">💾 Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS TAB -->
+    <div class="tab-content" id="tab-products">
+      <div class="tab-header-row">
+        <div><h2>📦 Products / Menu</h2><p>Manage what you offer.</p></div>
+        <button class="btn-primary" onclick="openProductModal()">+ Add Product</button>
+      </div>
+      <div class="search-bar" style="margin-bottom:18px;">
+        <span class="search-icon">🔍</span>
+        <input id="productSearch" placeholder="Search products..." oninput="filterProducts()" />
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+    </div>
+
+    <!-- ORDERS TAB -->
+    <div class="tab-content" id="tab-orders">
+      <div class="tab-header"><h2>🛒 Orders & Inquiries</h2><p>Track customer requests.</p></div>
+      <div class="filter-bar" style="margin-bottom:18px;">
+        <button class="filter-btn active" onclick="filterOrders('all',this)">All</button>
+        <button class="filter-btn" onclick="filterOrders('pending',this)">⏳ Pending</button>
+        <button class="filter-btn" onclick="filterOrders('confirmed',this)">✅ Confirmed</button>
+        <button class="filter-btn" onclick="filterOrders('completed',this)">🎉 Completed</button>
+        <button class="filter-btn" onclick="filterOrders('cancelled',this)">❌ Cancelled</button>
+      </div>
+      <div class="orders-table-wrap">
+        <table class="orders-table">
+          <thead><tr><th>#</th><th>Customer</th><th>Item</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="ordersBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- REVIEWS TAB -->
+    <div class="tab-content" id="tab-reviews">
+      <div class="tab-header"><h2>⭐ Customer Reviews</h2><p>See what residents are saying.</p></div>
+      <div class="rating-summary-card">
+        <div><div class="rating-big">4.6</div><div class="rating-stars-big">⭐⭐⭐⭐⭐</div><div class="rating-count">23 reviews</div></div>
+        <div class="rating-bars">
+          <div class="rating-bar-row"><span>5⭐</span><div class="rbar"><div class="rbar-fill" style="width:70%"></div></div><span>14</span></div>
+          <div class="rating-bar-row"><span>4⭐</span><div class="rbar"><div class="rbar-fill" style="width:17%"></div></div><span>4</span></div>
+          <div class="rating-bar-row"><span>3⭐</span><div class="rbar"><div class="rbar-fill" style="width:9%"></div></div><span>3</span></div>
+          <div class="rating-bar-row"><span>2⭐</span><div class="rbar"><div class="rbar-fill" style="width:4%"></div></div><span>1</span></div>
+          <div class="rating-bar-row"><span>1⭐</span><div class="rbar"><div class="rbar-fill" style="width:4%"></div></div><span>1</span></div>
+        </div>
+      </div>
+      <div id="reviewsList"></div>
+    </div>
+
+    <!-- PROMOTIONS TAB -->
+    <div class="tab-content" id="tab-promotions">
+      <div class="tab-header-row">
+        <div><h2>📣 Promotions</h2><p>Create special offers for the neighbourhood.</p></div>
+        <button class="btn-primary" onclick="openPromoModal()">+ Create Promo</button>
+      </div>
+      <div class="promos-grid" id="promosGrid"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal modal-lg">
+    <h3 id="productModalTitle">📦 Add Product</h3>
+    <div class="form-grid-2">
+      <div class="form-group"><label>Name *</label><input id="prodName" placeholder="Product name" /></div>
+      <div class="form-group"><label>Price (₹)</label><input type="number" id="prodPrice" placeholder="250" /></div>
+      <div class="form-group"><label>Category</label><input id="prodCategory" placeholder="e.g. Beverages" /></div>
+      <div class="form-group"><label>Availability</label>
+        <select id="prodAvailability">
+          <option value="available">✅ Available</option>
+          <option value="out_of_stock">❌ Out of Stock</option>
+          <option value="preorder">📋 Pre-order</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group"><label>Description</label><textarea id="prodDesc" rows="2" placeholder="Brief description..."></textarea></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeProductModal()">Cancel</button>
+      <button class="btn-submit" onclick="submitProduct()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROMO MODAL -->
+<div class="modal-overlay" id="promoModal">
+  <div class="modal modal-lg">
+    <h3>📣 Create Promotion</h3>
+    <div class="form-group"><label>Title *</label><input id="promoTitle" placeholder="e.g. Eid Special 20% Off" /></div>
+    <div class="form-group"><label>Description *</label><textarea id="promoDesc" rows="2" placeholder="What's the offer?"></textarea></div>
+    <div class="form-grid-2">
+      <div class="form-group"><label>Discount</label><input id="promoDiscount" placeholder="e.g. 20% or ₹50 off" /></div>
+      <div class="form-group"><label>Valid Until</label><input type="date" id="promoExpiry" /></div>
+    </div>
+    <div class="form-group"><label>Type</label>
+      <select id="promoType">
+        <option value="discount">💸 Discount</option>
+        <option value="buy1get1">🎁 Buy 1 Get 1</option>
+        <option value="freedelivery">🚀 Free Delivery</option>
+        <option value="seasonal">🌟 Seasonal</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closePromoModal()">Cancel</button>
+      <button class="btn-submit" onclick="submitPromo()">🚀 Launch</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/business-dashboard.js"></script>
+</body>
+</html>

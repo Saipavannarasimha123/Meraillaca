@@ -1,0 +1,149 @@
+/* services-dashboard.css – Mera Ilaka */
+
+.tab-content { display:none; }
+.tab-content.active { display:block; animation:fadeIn .25s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none} }
+.sidebar a { cursor:pointer; user-select:none; }
+
+/* Welcome Banner */
+.sv-welcome-banner {
+  background:linear-gradient(135deg,#00695c,#00897b,#26a69a);
+  color:#fff; border-radius:16px; padding:22px 26px; margin-bottom:26px;
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+  box-shadow:0 4px 20px rgba(0,105,92,.3);
+}
+.sv-welcome-left { display:flex; align-items:center; gap:18px; }
+.sv-logo { font-size:52px; background:rgba(255,255,255,.15); border-radius:14px; width:72px; height:72px; display:flex; align-items:center; justify-content:center; }
+.sv-welcome-left h2 { font-size:20px; font-weight:800; margin-bottom:4px; }
+.sv-welcome-left p  { font-size:13px; opacity:.88; margin-bottom:6px; }
+.sv-verified-pill { display:inline-block; background:rgba(255,255,255,.2); border:1.5px solid rgba(255,255,255,.5); border-radius:20px; padding:3px 12px; font-size:12px; font-weight:700; }
+.sv-welcome-actions { display:flex; gap:10px; flex-wrap:wrap; }
+.btn-action { padding:9px 18px; border:none; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; transition:opacity .2s,transform .15s; }
+.btn-action:hover  { opacity:.85; }
+.btn-action:active { transform:scale(.96); }
+.btn-action.teal   { background:rgba(255,255,255,.2); color:#fff; border:1.5px solid rgba(255,255,255,.5); }
+.btn-action.purple { background:#7b1fa2; color:#fff; }
+.btn-action.gold   { background:#f9a825; color:#fff; }
+
+/* Stats Grid */
+.sv-stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:26px; }
+.sv-stat-card { background:#fff; border-radius:13px; padding:18px; box-shadow:0 2px 12px rgba(0,0,0,.07); display:flex; align-items:center; gap:14px; transition:transform .2s,box-shadow .2s; }
+.sv-stat-card:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,0,0,.1); }
+.sv-stat-icon { font-size:28px; min-width:34px; text-align:center; }
+.sv-stat-num  { font-size:24px; font-weight:800; color:#00695c; line-height:1; }
+.sv-stat-lbl  { font-size:12px; color:#777; margin-top:3px; }
+.sv-trend { font-size:11px; font-weight:700; }
+.sv-trend.up      { color:#2e7d32; }
+.sv-trend.down    { color:#c62828; }
+.sv-trend.neutral { color:#888; }
+
+/* Chart */
+.chart-bar-wrap { display:flex; align-items:flex-end; gap:12px; height:130px; padding-top:10px; }
+.chart-bar-col  { flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end; }
+.chart-bar { width:100%; background:linear-gradient(180deg,#00695c,#26a69a); border-radius:6px 6px 0 0; min-height:6px; }
+.chart-bar:hover { background:linear-gradient(180deg,#004d40,#00695c); }
+.chart-bar-val { font-size:10px; font-weight:700; color:#555; margin-bottom:4px; }
+.chart-bar-day { font-size:10.5px; color:#999; margin-top:6px; }
+
+/* Tab headers */
+.tab-header { margin-bottom:22px; }
+.tab-header h2 { font-size:21px; font-weight:800; color:#00695c; margin-bottom:4px; }
+.tab-header p  { font-size:13px; color:#777; }
+
+/* Filter */
+.filter-bar { display:flex; gap:10px; flex-wrap:wrap; }
+.filter-btn { padding:7px 16px; border:1.8px solid #ddd; border-radius:20px; background:#fff; font-size:13px; font-weight:600; color:#555; cursor:pointer; transition:all .2s; }
+.filter-btn.active,.filter-btn:hover { background:#00695c; color:#fff; border-color:#00695c; }
+
+/* Overview rows */
+.ov-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f5f5f5; font-size:13px; }
+.ov-row:last-child { border-bottom:none; }
+.ov-left  { display:flex; flex-direction:column; gap:2px; }
+.ov-title { font-size:13px; font-weight:700; color:#222; }
+.ov-sub   { font-size:12px; color:#888; }
+
+/* Bookings Table */
+.bookings-table-wrap { background:#fff; border-radius:13px; box-shadow:0 2px 10px rgba(0,0,0,.07); overflow:hidden; }
+.bookings-table { width:100%; border-collapse:collapse; font-size:13px; }
+.bookings-table thead { background:#e0f2f1; }
+.bookings-table th { padding:12px 14px; text-align:left; font-size:12px; font-weight:800; color:#00695c; text-transform:uppercase; letter-spacing:.5px; }
+.bookings-table td { padding:12px 14px; border-bottom:1px solid #f0f0f0; color:#444; }
+.bookings-table tbody tr:last-child td { border-bottom:none; }
+.bookings-table tbody tr:hover { background:#f5fffe; }
+.bk-status { display:inline-block; padding:3px 10px; border-radius:20px; font-size:11.5px; font-weight:700; }
+.bk-status.pending   { background:#fff8e1; color:#e65100; }
+.bk-status.confirmed { background:#e3f2fd; color:#1565c0; }
+.bk-status.completed { background:#e8f5e9; color:#2e7d32; }
+.bk-status.cancelled { background:#ffebee; color:#c62828; }
+.btn-view-bk { padding:5px 12px; background:#00695c; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer; }
+.btn-view-bk:hover { background:#004d40; }
+
+/* Reviews */
+.rating-summary-card { background:#fff; border-radius:14px; padding:22px 24px; box-shadow:0 2px 10px rgba(0,0,0,.07); margin-bottom:20px; display:flex; align-items:center; gap:28px; flex-wrap:wrap; }
+.rating-big       { font-size:50px; font-weight:800; color:#00695c; line-height:1; }
+.rating-stars-big { font-size:20px; margin-top:4px; }
+.rating-count     { font-size:12.5px; color:#888; margin-top:4px; }
+.rating-bars      { flex:1; min-width:200px; display:flex; flex-direction:column; gap:6px; }
+.rating-bar-row   { display:flex; align-items:center; gap:10px; font-size:12.5px; color:#555; }
+.rbar      { flex:1; height:8px; background:#eee; border-radius:4px; overflow:hidden; }
+.rbar-fill { height:100%; background:linear-gradient(90deg,#ffc107,#ff9800); border-radius:4px; }
+.review-card { background:#fff; border-radius:12px; padding:16px 18px; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:12px; }
+.review-card-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.reviewer-info   { display:flex; align-items:center; gap:12px; }
+.reviewer-avatar { width:36px; height:36px; background:linear-gradient(135deg,#00695c,#26a69a); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:15px; color:#fff; font-weight:800; }
+.reviewer-name { font-size:14px; font-weight:700; color:#222; }
+.reviewer-date { font-size:12px; color:#aaa; margin-top:2px; }
+.review-stars  { font-size:15px; }
+.review-text   { font-size:13.5px; color:#444; line-height:1.6; }
+.review-reply  { margin-top:10px; padding:9px 13px; background:#e0f2f1; border-left:3px solid #00695c; border-radius:6px; font-size:12.5px; color:#00695c; }
+.btn-reply-review { margin-top:10px; padding:6px 14px; border:1.5px solid #00695c; background:transparent; color:#00695c; border-radius:6px; font-size:12.5px; font-weight:700; cursor:pointer; }
+.btn-reply-review:hover { background:#00695c; color:#fff; }
+
+/* Earnings */
+.earnings-summary { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:4px; }
+.earn-card { background:#fff; border-radius:13px; padding:20px 16px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,.07); }
+.earn-card.total   { border-top:4px solid #00695c; }
+.earn-card.month   { border-top:4px solid #1976d2; }
+.earn-card.week    { border-top:4px solid #7b1fa2; }
+.earn-card.pending { border-top:4px solid #e65100; }
+.earn-icon { font-size:26px; margin-bottom:8px; }
+.earn-num  { font-size:20px; font-weight:800; color:#222; margin-bottom:4px; }
+.earn-lbl  { font-size:12px; color:#888; }
+.earnings-table-wrap { overflow:hidden; border-radius:10px; }
+
+/* Profile form */
+.profile-form-card { background:#fff; border-radius:14px; padding:24px 26px; box-shadow:0 2px 12px rgba(0,0,0,.07); }
+.form-section-title { font-size:12.5px; font-weight:800; color:#00695c; text-transform:uppercase; letter-spacing:.8px; padding-bottom:8px; border-bottom:2px solid #e0f2f1; margin-bottom:14px; }
+.form-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px 18px; margin-bottom:4px; }
+.form-group { display:flex; flex-direction:column; gap:5px; margin-bottom:10px; }
+.form-group label { font-size:12.5px; font-weight:700; color:#555; }
+.form-group input,.form-group select,.form-group textarea { padding:9px 12px; border:1.6px solid #ddd; border-radius:8px; font-size:13px; font-family:inherit; outline:none; background:#fafafa; transition:border-color .2s; }
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus { border-color:#00695c; }
+.form-group textarea { resize:vertical; }
+.status-toggle-row { display:flex; align-items:center; gap:14px; background:#f5f5f5; border-radius:10px; padding:12px 16px; margin-bottom:18px; }
+.status-toggle-label { font-size:14px; font-weight:700; color:#333; }
+.status-toggle-sub   { font-size:12px; color:#888; margin-top:2px; }
+.status-toggle-text  { font-size:14px; font-weight:700; color:#00695c; min-width:100px; }
+.toggle-switch { position:relative; display:inline-block; width:50px; height:26px; flex-shrink:0; margin-left:auto; }
+.toggle-switch input { opacity:0; width:0; height:0; }
+.toggle-slider { position:absolute; cursor:pointer; inset:0; background:#ccc; border-radius:26px; transition:background .3s; }
+.toggle-slider:before { content:""; position:absolute; height:20px; width:20px; left:3px; bottom:3px; background:#fff; border-radius:50%; transition:transform .3s; box-shadow:0 1px 4px rgba(0,0,0,.2); }
+.toggle-switch input:checked + .toggle-slider { background:#00695c; }
+.toggle-switch input:checked + .toggle-slider:before { transform:translateX(24px); }
+.form-actions { display:flex; justify-content:flex-end; gap:10px; }
+.btn-primary   { padding:10px 22px; background:#00695c; color:#fff; border:none; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; transition:background .2s; }
+.btn-primary:hover { background:#004d40; }
+.btn-secondary { padding:10px 18px; background:#fff; color:#555; border:1.6px solid #ddd; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; }
+.btn-secondary:hover { background:#f5f5f5; }
+.modal-lg { max-width:480px !important; }
+
+/* Responsive */
+@media(max-width:1000px) { .sv-stats-grid { grid-template-columns:repeat(2,1fr); } .earnings-summary { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:700px)  {
+  .sv-stats-grid { grid-template-columns:1fr 1fr; }
+  .earnings-summary { grid-template-columns:1fr 1fr; }
+  .sv-welcome-banner { flex-direction:column; }
+  .form-grid-2 { grid-template-columns:1fr; }
+  .rating-summary-card { flex-direction:column; gap:14px; }
+  .bookings-table th,.bookings-table td { padding:9px 8px; font-size:12px; }
+}

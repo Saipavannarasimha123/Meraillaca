@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mera Ilaka 📅 Event Dashboard</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/event-dashboard.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand"><span>🏘️</span>Mera Ilaka</div>
+  <div class="nav-right">
+    <span id="navClock"></span>
+    <div class="nav-bell">🔔<span class="dot"></span></div>
+    <div class="nav-user" id="navUser">👤 Loading...</div>
+    <button class="btn-logout" onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-section">Events</div>
+    <a class="active" onclick="showTab('overview')"><span class="icon">📊</span> Overview</a>
+    <a onclick="showTab('manage')"><span class="icon">📅</span> Manage Events</a>
+    <a onclick="showTab('rsvps')"><span class="icon">👥</span> Joinings</a>
+    <a onclick="showTab('calendar')"><span class="icon">🗓️</span> Calendar</a>
+    <a onclick="showTab('gallery')"><span class="icon">🖼️</span> Gallery</a>
+    <div class="sidebar-section">Neighbourhood</div>
+    <a href="dashboard.html"><span class="icon">🏠</span> Community Home</a>
+    <a href="events.html"><span class="icon">📅</span> All Events</a>
+    <a href="announcements.html"><span class="icon">📢</span> Announcements</a>
+    <div class="sidebar-section">Account</div>
+    <a href="profile.html"><span class="icon">👤</span> My Profile</a>
+  </aside>
+
+  <main class="main">
+
+    <!-- OVERVIEW TAB -->
+    <div class="tab-content active" id="tab-overview">
+
+      <div class="ev-welcome-banner">
+        <div class="ev-welcome-left">
+          <div class="ev-logo">📅</div>
+          <div>
+            <h2>Events Dashboard</h2>
+            <p>Manage and track all neighbourhood events in one place.</p>
+          </div>
+        </div>
+        <div class="ev-welcome-actions">
+          <button class="btn-action purple" onclick="showTab('manage');openEventModal()">➕ Create Event</button>
+          <button class="btn-action blue"   onclick="showTab('rsvps')">👥 Who's Joining</button>
+          <button class="btn-action teal"   onclick="showTab('calendar')">🗓️ Calendar</button>
+        </div>
+      </div>
+
+      <div class="ev-stats-grid">
+        <div class="ev-stat-card"><div class="ev-stat-icon">📅</div><div><div class="ev-stat-num" id="statTotal">6</div><div class="ev-stat-lbl">Total Events <span class="ev-trend up">▲ 2 this month</span></div></div></div>
+        <div class="ev-stat-card"><div class="ev-stat-icon">👥</div><div><div class="ev-stat-num" id="statRsvps">48</div><div class="ev-stat-lbl">Total Joining <span class="ev-trend up">▲ 12 this week</span></div></div></div>
+        <div class="ev-stat-card"><div class="ev-stat-icon">🎉</div><div><div class="ev-stat-num" id="statUpcoming">4</div><div class="ev-stat-lbl">Upcoming <span class="ev-trend neutral">Next: 12 Oct</span></div></div></div>
+        <div class="ev-stat-card"><div class="ev-stat-icon">✅</div><div><div class="ev-stat-num" id="statCompleted">2</div><div class="ev-stat-lbl">Completed <span class="ev-trend neutral">This month</span></div></div></div>
+        <div class="ev-stat-card"><div class="ev-stat-icon">🏥</div><div><div class="ev-stat-num" id="statHealth">2</div><div class="ev-stat-lbl">Health Events <span class="ev-trend up">Most popular</span></div></div></div>
+        <div class="ev-stat-card"><div class="ev-stat-icon">🎪</div><div><div class="ev-stat-num" id="statFestival">1</div><div class="ev-stat-lbl">Festivals <span class="ev-trend neutral">1 upcoming</span></div></div></div>
+      </div>
+
+      <div class="row-2">
+        <div class="widget">
+          <h3>📅 Upcoming Events <a onclick="showTab('manage')">View All →</a></h3>
+          <div id="upcomingList"></div>
+        </div>
+        <div class="widget">
+          <h3>👥 Recently Joining <a onclick="showTab('rsvps')">View All →</a></h3>
+          <div id="recentRsvpList"></div>
+        </div>
+      </div>
+
+      <div class="widget" style="margin-top:20px;">
+        <h3>📊 Joining by Category</h3>
+        <div class="chart-bar-wrap" id="chartWrap"></div>
+      </div>
+
+    </div>
+
+    <!-- MANAGE EVENTS TAB -->
+    <div class="tab-content" id="tab-manage">
+      <div class="tab-header-row">
+        <div><h2>📅 Manage Events</h2><p>Create, edit, and remove neighbourhood events.</p></div>
+        <button class="btn-primary" onclick="openEventModal()">+ Create Event</button>
+      </div>
+      <div class="filter-bar" style="margin-bottom:18px;">
+        <button class="filter-btn active" onclick="filterManage('all',this)">All</button>
+        <button class="filter-btn" onclick="filterManage('health',this)">🏥 Health</button>
+        <button class="filter-btn" onclick="filterManage('social',this)">🤝 Social</button>
+        <button class="filter-btn" onclick="filterManage('meeting',this)">📋 Meeting</button>
+        <button class="filter-btn" onclick="filterManage('festival',this)">🎉 Festival</button>
+      </div>
+      <div class="manage-events-list" id="manageEventsList"></div>
+    </div>
+
+    <!-- JOININGS TAB -->
+    <div class="tab-content" id="tab-rsvps">
+      <div class="tab-header"><h2>👥 Joining Tracker</h2><p>See who is attending which events.</p></div>
+      <div class="filter-bar" style="margin-bottom:18px;">
+        <button class="filter-btn active" onclick="filterRsvpTable('all',this)">All Events</button>
+        <button class="filter-btn" onclick="filterRsvpTable('health',this)">🏥 Health</button>
+        <button class="filter-btn" onclick="filterRsvpTable('social',this)">🤝 Social</button>
+        <button class="filter-btn" onclick="filterRsvpTable('meeting',this)">📋 Meeting</button>
+        <button class="filter-btn" onclick="filterRsvpTable('festival',this)">🎉 Festival</button>
+      </div>
+      <div class="rsvp-table-wrap">
+        <table class="rsvp-table">
+          <thead><tr><th>#</th><th>Event</th><th>Category</th><th>Date</th><th>Joining</th><th>Status</th></tr></thead>
+          <tbody id="rsvpTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CALENDAR TAB -->
+    <div class="tab-content" id="tab-calendar">
+      <div class="tab-header"><h2>🗓️ Event Calendar</h2><p>October 2026</p></div>
+      <div class="calendar-wrap">
+        <div class="cal-header">
+          <button class="cal-nav" onclick="prevMonth()">‹</button>
+          <span id="calTitle">October 2026</span>
+          <button class="cal-nav" onclick="nextMonth()">›</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+      <div class="widget" style="margin-top:20px;">
+        <h3>📅 Events This Month</h3>
+        <div id="calEventsList"></div>
+      </div>
+    </div>
+
+    <!-- GALLERY TAB -->
+    <div class="tab-content" id="tab-gallery">
+      <div class="tab-header-row">
+        <div><h2>🖼️ Event Gallery</h2><p>Photos from past neighbourhood events.</p></div>
+        <button class="btn-primary" onclick="openGalleryModal()">+ Add Photo</button>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- CREATE / EDIT EVENT MODAL -->
+<div class="modal-overlay" id="eventModal">
+  <div class="modal modal-lg">
+    <h3 id="eventModalTitle">📅 Create New Event</h3>
+    <div class="form-grid-2">
+      <div class="form-group"><label>Event Title *</label><input id="evTitle" placeholder="e.g. Blood Donation Camp" /></div>
+      <div class="form-group"><label>Category *</label>
+        <select id="evCategory">
+          <option value="health">🏥 Health</option>
+          <option value="social">🤝 Social</option>
+          <option value="meeting">📋 Meeting</option>
+          <option value="festival">🎉 Festival</option>
+          <option value="sports">🏅 Sports</option>
+          <option value="cultural">🎭 Cultural</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Date *</label><input type="date" id="evDate" /></div>
+      <div class="form-group"><label>Time *</label><input id="evTime" placeholder="e.g. 6 PM – 9 PM" /></div>
+      <div class="form-group"><label>Location *</label><input id="evLocation" placeholder="e.g. Community Hall" /></div>
+      <div class="form-group"><label>Max Attendees</label><input type="number" id="evMax" placeholder="e.g. 100" /></div>
+    </div>
+    <div class="form-group"><label>Description *</label><textarea id="evDesc" rows="3" placeholder="Tell residents about this event..."></textarea></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeEventModal()">Cancel</button>
+      <button class="btn-submit" onclick="submitEvent()">Save Event</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD GALLERY PHOTO MODAL -->
+<div class="modal-overlay" id="galleryModal">
+  <div class="modal">
+    <h3>🖼️ Add Gallery Photo</h3>
+    <div class="form-group"><label>Event Name</label><input id="galEvent" placeholder="e.g. Diwali Celebration 2026" /></div>
+    <div class="form-group"><label>Caption</label><input id="galCaption" placeholder="Short caption..." /></div>
+    <div class="form-group"><label>Emoji / Icon</label><input id="galEmoji" placeholder="e.g. 🎆" /></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeGalleryModal()">Cancel</button>
+      <button class="btn-submit" onclick="submitGallery()">Add</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/event-dashboard.js"></script>
+</body>
+</html>

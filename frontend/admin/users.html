@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mera Ilaka Admin – Users</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/dashboard.css" />
+  <link rel="stylesheet" href="../../css/admin.css" />
+  <link rel="stylesheet" href="../../css/tables.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand"><span>🏘️</span>Mera Ilaka <span style="font-size:11px;background:rgba(255,255,255,0.2);padding:2px 8px;border-radius:10px;margin-left:8px;">ADMIN</span></div>
+    <div class="nav-right">
+      <span id="navClock"></span>
+      <div class="nav-user" id="navUser">👤 Loading...</div>
+      <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-section">Admin Panel</div>
+      <a href="dashboard.html"><span class="icon">🏠</span> Dashboard</a>
+      <a class="active" href="users.html"><span class="icon">👥</span> Users</a>
+      <a href="residents.html"><span class="icon">🏘️</span> Residents</a>
+      <a href="businesses.html"><span class="icon">🏪</span> Businesses</a>
+      <a href="services.html"><span class="icon">🔧</span> Services</a>
+      <a href="announcements.html"><span class="icon">📢</span> Announcements</a>
+      <a href="events.html"><span class="icon">📅</span> Events</a>
+      <a href="complaints.html"><span class="icon">📝</span> Complaints</a>
+      <a href="marketplace.html"><span class="icon">🛒</span> Marketplace</a>
+      <a href="reports.html"><span class="icon">📊</span> Reports</a>
+      <a href="settings.html"><span class="icon">⚙️</span> Settings</a>
+      <div class="sidebar-section">Navigation</div>
+      <a href="../dashboard.html"><span class="icon">↩️</span> Back to Site</a>
+    </aside>
+
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h2>👥 Admin – Users</h2>
+          <p>Manage users from the admin panel.</p>
+        </div>
+      </div>
+
+      <div class="widget">
+        <p style="color:#aaa;font-size:14px;padding:20px 0;">
+          📋 Users management panel – connect to backend API to populate this view.
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/script.js"></script>
+  <script src="../../js/admin.js"></script>
+</body>
+</html>
